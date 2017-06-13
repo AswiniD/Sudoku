@@ -1,0 +1,79 @@
+html{
+	background:url("SudokuImage1.png");
+	background-size:cover;
+	background-repeat:no-repeat;
+}
+
+body{
+	position :relative;	
+}
+
+span{
+	color: green;
+}
+
+#displayRed{
+	color:#6C0505;
+}
+
+.container-fluid{
+	margin-top:12%;	
+	background-color:#1D431B;
+    background:url("sudoku_1.png");		
+}
+
+div table{	
+	border-radius:3%!important;		
+	border-collapse:separate;
+	width:100%;	
+}
+
+#boardDiv{
+	border-radius:3%;		
+	border-width: 2px;
+	border-style:solid;
+}
+
+#mainDiv{
+
+}
+
+#colDiv{
+	border-radius:3%;		
+	border-width: 1px;
+	border-style:solid;
+    width:11.1%;
+    padding:1px;
+    /*border-color: #a8ddb5 #584F06 #a9bba1 #5A8572 #05ba89;*/    
+}
+
+input[type=button]{
+	width:100%;
+	padding: 15px;
+    float:center;
+    background-color:#88B79F;
+    border-color: #1E3D2D;
+    border:5;	
+}
+
+input[type=button]:hover{	
+    background-color:#a8ddb5;   	
+}
+
+input[type=text]{	
+	width:100%; 
+	text-align:center;
+    background-color:#88B79F;
+    border-color: #1E3D2D;      
+    border: 1 solid;
+	font-weight:bold;
+
+}
+
+/*To disable selector scrollrbar*/
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {   
+   -webkit-appearance: none; 
+}
+
+

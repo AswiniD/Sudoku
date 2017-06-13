@@ -1,0 +1,111 @@
+<!Doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=0">
+	<title>Play Sudoku</title>
+
+	<script type="text/javascript" src="angular.min.js"></script>
+
+	<script src="C:\NodeProjects\Angular_Practice\Sudoku\jquery-3.1.1.min.js"></script>
+	<script src="C:\NodeProjects\Angular_Practice\Sudoku\bootstrap.min.js"></script>
+	<script type="text/javascript" src="sudoku.js"></script>	
+	  <!-- Bootstrap -->
+    <link href = "bootstrap.min.css" rel = "stylesheet"/>
+	<link type="text/css" rel="stylesheet" href="sudoku.css"/>
+		
+	
+	<!--Library For alerts-->
+	<link type="text/css" rel="stylesheet" href="bootstrap-sweetalert-master\dist\sweetalert.css"/>
+	<script src="bootstrap-sweetalert-master\dist\sweetalert.min.js"></script>	
+</head>
+
+<body ng-app="myAPP" ng-controller="tableController" >
+    <!-- Using container fluid to use the entire width of the page-->
+<div class="container-fluid" >	
+	
+	<div class="row">
+	<div class="col-md-1">
+	</div>
+	 	<!-- About-->
+        <div class="col-md-3" style="width:23%">
+	   		<div ng-style="textCustomStyle">
+	   			<div>
+	   		    	A Sudoku puzzle consists of 81 cells which are divided into nine columns, rows and regions. The task is now to place the numbers from <span>1</span> to <span>9</span> into the empty cells in such a way that in every row, column and 3×3 region each number appears <span id="displayRed"><b>only once</b></span>.
+	   		    	<br/>
+	   		    	Default difficulty level is <span><i>Easy</i></span>.You can change the difficulty as <span><i>Medium</i>
+	   		    	</span> or <span><i>Hard</i></span>
+                    <br/>
+                    <p style="padding-top:5px;">Click on a cell and use your keyboard to type in the numbers
+	   		    </div>
+	   		</div> 
+		</div>
+		<!--Table-->
+        <div class="col-md-5" id="boardDiv"> 
+               
+			<!-- <table border="2">
+			<thead></thead>	
+			
+			  	<tbody>	
+
+				<tr ng-repeat="rows in tableData" class="form-group" ng-form name="myForm">							
+					<td text-align="center"  ng-repeat="col in rows">
+										 					 
+						<input type = "text" min="1" max="9" maxxlength="1" name="inputNumber" ng-model = "inputNumber" id = {{col}} ng-pattern = "re" ng-style = "inputValue"  ng-click = "saveRecentValue(col)"  ng-change = "storeValue(col)" /><br/>
+																		
+					</td>
+					<div ng-show="myForm.inputNumber.$error.pattern" class="alert alert-warning alert-dismissible" role="alert">
+	  					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	    				<span aria-hidden="true">&times;</span>
+	  					</button>
+	 			 		<strong>Please enter a number between 1-9</strong> 
+					</div>	
+				</tr>
+				
+				</tbody>
+
+				<tfoot>
+					<tr>
+					<td colspan="9">				
+						
+					</td>
+					</tr>
+				</tfoot> 
+			</table>   -->  				
+			
+				<div  class="row no-gutter" ng-repeat="rows in tableData" id="mainDiv">	
+				<form name="myForm" novalidate>					
+					<div class="col-md-1" text-align="center" id="colDiv" ng-repeat="col in rows" >					 				 
+					<input type = "text" maxlength="1" ng-max="9" name="inputNumber" ng-model = "inputNumber" id = {{col}} 
+					ng-pattern = "re" ng-style = "inputValue"  ng-click = "saveRecentValue(col)"  ng-change = "storeValue(col)" />
+					<br/>
+						<div ng-show="myForm.inputNumber.$error.pattern" class="alert alert-warning alert-dismissible" role="alert">
+	  					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	    				<span aria-hidden="true">&times;</span>
+	  					</button>
+	 			 		<strong>Please enter a number between 1-9</strong> 
+				        </div>																	
+					</div>				
+				</form>	
+				</div>
+			
+				
+		
+       </div>	
+		<!-- Operations-->	
+		<div class="col-md-2" style="width:13%;margin-top: 2%">		
+	   		<select ng-style="buttonCustomStyle" ng-model="dropdownText" ng-change="initSudoku()" ng-options="level for level in levels" id="dropDownMenu">
+	   		</select>			   		
+	   		<input type="button" ng-style = "buttonCustomStyle" name="Restart" ng-click="newGame()"  value="Restart" >
+	   		<input type="button" ng-style = "buttonCustomStyle" name="Save" ng-click="save()" value="Save" >
+			<input type="button" ng-style = "buttonCustomStyle" name="Undo" ng-click="resume()" value="Resume" >
+			<input type="button" ng-style = "buttonCustomStyle" name="Submit"  ng-click="isGameFinished()" value="Submit">
+			<input type="button" ng-style = "buttonCustomStyle" name="Validate" ng-click="validate()" value="Validate">		
+		</div>	
+
+
+    </div>	
+</div><!--Container End-->
+	
+</body>
+</html>
