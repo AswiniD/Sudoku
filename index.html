@@ -22,13 +22,13 @@
 
 <body ng-app="myAPP" ng-controller="tableController" >
     <!-- Using container fluid to use the entire width of the page-->
-<div class="container-fluid" >	
+<div class="container-fluid">	
 	
 	<div class="row">
-	<div class="col-md-1">
-	</div>
+		<div class="col-md-1 col-xs-1">
+		</div>
 	 	<!-- About-->
-        <div class="col-md-3" style="width:23%">
+        <div class="col-md-3 col-xs-3 centerBlock" >
 	   		<div ng-style="textCustomStyle">
 	   			<div>
 	   		    	A Sudoku puzzle consists of 81 cells which are divided into nine columns, rows and regions. The task is now to place the numbers from <span>1</span> to <span>9</span> into the empty cells in such a way that in every row, column and 3×3 region each number appears <span id="displayRed"><b>only once</b></span>.
@@ -41,7 +41,7 @@
 	   		</div> 
 		</div>
 		<!--Table-->
-        <div class="col-md-5" id="boardDiv"> 
+        <div class="col-md-5 col-xs-5 centerBlock" id="boardDiv"> 
                
 			<!-- <table border="2">
 			<thead></thead>	
@@ -75,9 +75,9 @@
 			
 				<div  class="row no-gutter" ng-repeat="rows in tableData" id="mainDiv">	
 				<form name="myForm" novalidate>					
-					<div class="col-md-1" text-align="center" id="colDiv" ng-repeat="col in rows" >					 				 
-					<input type = "text" maxlength="1" ng-max="9" name="inputNumber" ng-model = "inputNumber" id = {{col}} 
-					ng-pattern = "re" ng-style = "inputValue"  ng-click = "saveRecentValue(col)"  ng-change = "storeValue(col)" />
+					<div class="col-md-1 col-xs-1" text-align="center" id="colDiv" ng-repeat="col in rows" >					 				 
+					<input type = "number"  name="inputNumber" ng-model = "inputNumber" id = {{col}} 
+					 ng-style = "inputValue"  ng-click = "saveRecentValue(col)"  ng-change = "storeValue(col)" />
 					<br/>
 						<div ng-show="myForm.inputNumber.$error.pattern" class="alert alert-warning alert-dismissible" role="alert">
 	  					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -93,7 +93,7 @@
 		
        </div>	
 		<!-- Operations-->	
-		<div class="col-md-2" style="width:13%;margin-top: 2%">		
+		<div class="col-md-2 col-xs-1 centerBlock" style="width:13%;" >		
 	   		<select ng-style="buttonCustomStyle" ng-model="dropdownText" ng-change="initSudoku()" ng-options="level for level in levels" id="dropDownMenu">
 	   		</select>			   		
 	   		<input type="button" ng-style = "buttonCustomStyle" name="Restart" ng-click="newGame()"  value="Restart" >

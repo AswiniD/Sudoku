@@ -287,9 +287,9 @@ app.controller("tableController",["$scope","$window",function($scope,$window){
 
    $scope.saveRecentValue = function(id){ 		
    		//var id = e.currentTarget.id;
-   		console.log("id "+id) ;  		
+   		
    		var cellvalue =	document.getElementById(id).value;   
-   		console.log("cellvalue"+" "+cellvalue);		
+   		
 		var cellColor = document.getElementById(id).style.backgroundColor;		
 		sessionStorage["$scope.recentValue"] = cellvalue;
 		sessionStorage["$scope.recentInputId"] = id;   
@@ -303,21 +303,24 @@ app.controller("tableController",["$scope","$window",function($scope,$window){
    $scope.storeValue = function(id){   	 		
    		var cellvalue =	document.getElementById(id).value;   		
 		var cellColor = document.getElementById(id).style.backgroundColor;
-        //var pattern = /^[a-z|A-Z]$/;
-		/*if(cellvalue < 0 || cellvalue > 9 || cellvalue.match(pattern))	{
-			document.getElementById(id).value = "";
-			alert("Please enter an input value with any number between 1 and 9");
+        
+	    if(Number(cellvalue) < 0 || cellvalue > 9 || cellvalue == "0")	{
+			document.getElementById(id).value = "";			
+			swal({
+			title: "Only numbers between 1-9 are allowed",
+			//text: "Oops!! Entered value is already present in Corresponding Row or Column",			
+			});	
 			
 		}else
-		{*/
+		{
 		sessionStorage["$scope.recentValue"] = cellvalue;
 		sessionStorage["$scope.recentInputId"] = id;   
-    	console.log("cellvalue-change"+" "+cellvalue);		
+    		
 		if(cellColor != 'red'){			
 			sessionStorage["cellColor"] = cellColor;
 		}
 		document.getElementById(id).style.backgroundColor = sessionStorage["cellColor"];
-	   // }
+	 }
 
 
    };

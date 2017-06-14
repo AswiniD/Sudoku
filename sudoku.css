@@ -60,7 +60,7 @@ input[type=button]:hover{
     background-color:#a8ddb5;   	
 }
 
-input[type=text]{	
+input[type=number]{	
 	width:100%; 
 	text-align:center;
     background-color:#88B79F;
@@ -76,4 +76,8 @@ input[type=number]::-webkit-outer-spin-button {
    -webkit-appearance: none; 
 }
 
-
+.centerBlock{
+display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
