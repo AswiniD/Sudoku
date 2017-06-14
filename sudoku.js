@@ -35,94 +35,93 @@ app.controller("tableController",["$scope","$window",function($scope,$window){
 		else if(selectedOption=="Medium")level=1;
 		else if(selectedOption=="Hard")level=2;	
 		
-		//alert(selectedOption+" "+level);
-        //2D $scope.matrix to store board values       
-        for(var rowCounter=0;rowCounter<9;rowCounter++){
-            $scope.matrix[rowCounter] = [];
-            for(var colCounter=0;colCounter<9;colCounter++){
-                var number = colCounter/1 + 1 + (rowCounter*3) + Math.floor(rowCounter/3)%3;
-                if(number>9)number = number % 9;
-                if(number==0)number=9;
-                $scope.matrix[rowCounter][colCounter] = number;   					
-			}          
-        }        
+	
+		//2D $scope.matrix to store board values       
+		for(var rowCounter=0;rowCounter<9;rowCounter++){
+		    $scope.matrix[rowCounter] = [];
+		    for(var colCounter=0;colCounter<9;colCounter++){
+			var number = colCounter/1 + 1 + (rowCounter*3) + Math.floor(rowCounter/3)%3;
+			if(number>9)number = number % 9;
+			if(number==0)number=9;
+			$scope.matrix[rowCounter][colCounter] = number;   					
+				}          
+		}        
          
-        // Switching rows (SELECTING ANY TWO ROWS FROM 3 AND SWITHING THOSE)      
-        for(var row=0;row<9;row+=3){
-            
-            for(var col=0;col<3;col++){
-                //generate the random number between [0,3)
-                row1 = Math.floor(Math.random()*3); 
-                row2 = Math.floor(Math.random()*3); 
-                while(row2==row1){
-                    //if both the generated numbers are equal generate other number
-                    row2 = Math.floor(Math.random()*3); 
-                }
-                //HERE ADDITION IS REQUIRED SINCE THE RANDOM NUMBER IS BETWEEN 0-3 WE NEED TO APPEND ROW NUMBER TO IT
-                row1 = row1 + row; 
-                row2 = row2 + row;  
-                //SWAP ROWS         
-                var tmpMatrix = [];
-                tmpMatrix = $scope.matrix[row1];
-                $scope.matrix[row1] = $scope.matrix[row2];
-                $scope.matrix[row2] = tmpMatrix;               
-            }           
-        }
-        
-        // Switching columns(SELECTING ANY TWO COLUMNS OUT OF THREE AND SWITCHING THOSE)        
-        for(var col=0;col<9;col+=3){
-            for(var row=0;row<3;row++){
-                col1 = Math.floor(Math.random()*3); 
-                col2 = Math.floor(Math.random()*3); 
-                while(col2==col1){
-                    col2 = Math.floor(Math.random()*3); 
-                }
-                 //HERE ADDITION IS REQUIRED SINCE THE RANDOM NUMBER IS BETWEEN 0-3 WE NEED TO APPEND COLUMN NUMBER TO IT
-                col1 = col1 + col;
-                col2 = col2 + col;        
-                //SWAP COLUMNS
-                var tmpMatrix = [];
-                for(var rowNumber=0;rowNumber<$scope.matrix.length;rowNumber++){
-                    var tmpMatrixValue = $scope.matrix[rowNumber][col1];
-                    $scope.matrix[rowNumber][col1] = $scope.matrix[rowNumber][col2];              
-                    $scope.matrix[rowNumber][col2] = tmpMatrixValue;             
-                }
-            }   
-        }      
+		// Switching rows (SELECTING ANY TWO ROWS FROM 3 AND SWITHING THOSE)      
+		for(var row=0;row<9;row+=3){
+
+		    for(var col=0;col<3;col++){
+			//generate the random number between [0,3)
+			row1 = Math.floor(Math.random()*3); 
+			row2 = Math.floor(Math.random()*3); 
+			while(row2==row1){
+			    //if both the generated numbers are equal generate other number
+			    row2 = Math.floor(Math.random()*3); 
+			}
+			//HERE ADDITION IS REQUIRED SINCE THE RANDOM NUMBER IS BETWEEN 0-3 WE NEED TO APPEND ROW NUMBER TO IT
+			row1 = row1 + row; 
+			row2 = row2 + row;  
+			//SWAP ROWS         
+			var tmpMatrix = [];
+			tmpMatrix = $scope.matrix[row1];
+			$scope.matrix[row1] = $scope.matrix[row2];
+			$scope.matrix[row2] = tmpMatrix;               
+		    }           
+		}
+
+		// Switching columns(SELECTING ANY TWO COLUMNS OUT OF THREE AND SWITCHING THOSE)        
+		for(var col=0;col<9;col+=3){
+		    for(var row=0;row<3;row++){
+			col1 = Math.floor(Math.random()*3); 
+			col2 = Math.floor(Math.random()*3); 
+			while(col2==col1){
+			    col2 = Math.floor(Math.random()*3); 
+			}
+			 //HERE ADDITION IS REQUIRED SINCE THE RANDOM NUMBER IS BETWEEN 0-3 WE NEED TO APPEND COLUMN NUMBER TO IT
+			col1 = col1 + col;
+			col2 = col2 + col;        
+			//SWAP COLUMNS
+			var tmpMatrix = [];
+			for(var rowNumber=0;rowNumber<$scope.matrix.length;rowNumber++){
+			    var tmpMatrixValue = $scope.matrix[rowNumber][col1];
+			    $scope.matrix[rowNumber][col1] = $scope.matrix[rowNumber][col2];              
+			    $scope.matrix[rowNumber][col2] = tmpMatrixValue;             
+			}
+		    }   
+		}      
         
 		//assign values from $scope.matrix to board
-        for(var row=0;row<$scope.matrix.length;row++){
-            for(var col=0;col<$scope.matrix[row].length;col++){ 			
-                var obj = document.getElementById(row+'_'+col); 				
-                obj.value = $scope.matrix[row][col];
-				obj.disabled=true;				
-				obj.style.backgroundColor="#5A8572";
-				obj.style.color='#000000'				                 
-            }           
-        }
-        //GIVING ALTERNATE COLORS IN A BOARD
-		cellColorCustomization();
+		for(var row=0;row<$scope.matrix.length;row++){
+		    for(var col=0;col<$scope.matrix[row].length;col++){ 			
+			var obj = document.getElementById(row+'_'+col); 				
+			obj.value = $scope.matrix[row][col];
+					obj.disabled=true;				
+					obj.style.backgroundColor="#5A8572";
+					obj.style.color='#000000'				                 
+		    }           
+		}
+		//GIVING ALTERNATE COLORS IN A BOARD
+			cellColorCustomization();
 		
-       //Display board based on selected level
+                //Display board based on selected level
 		for(var row=0;row<9;row+=1){ 
 			count=0;		
-            switch(level){
+            		switch(level){
 				case 0:while(count<3){
 					    col1 = Math.floor(Math.random()*9)+0;                
-					    obj = document.getElementById(row+'_'+col1);
-						
-                        if(obj.value!=''){
+					    obj = document.getElementById(row+'_'+col1);						
+                      			     if(obj.value!=''){
 						obj.value = '';
 						obj.disabled=false;
 						//obj.style.backgroundColor="red";						
 						count++;
 						}              	
-					}
-					break;
+					    }
+					   break;
 				case 1:while(count<4){
 					    col1 = Math.floor(Math.random()*9)+0;                
 					    obj = document.getElementById(row+'_'+col1);						
-                        if(obj.value!=''){
+                                            if(obj.value!=''){
 						obj.value = '';
 						obj.disabled=false;
 						//obj.style.backgroundColor="red";						
@@ -133,7 +132,7 @@ app.controller("tableController",["$scope","$window",function($scope,$window){
 				case 2:while(count<5){
 					    col1 = Math.floor(Math.random()*9)+0;                
 					    obj = document.getElementById(row+'_'+col1);						
-                        if(obj.value!=''){
+                                            if(obj.value!=''){
 						obj.disabled=false;
 						//obj.style.backgroundColor="red";						
 						obj.value = '';
@@ -142,7 +141,7 @@ app.controller("tableController",["$scope","$window",function($scope,$window){
 					}
 					break;				
 			}                                
-        }
+           }
 		//When we refresh validate function ask to enter some input
 		sessionStorage["$scope.recentValue"] = "null";
 		sessionStorage["$scope.recentInputId"] = "null";
@@ -172,35 +171,31 @@ app.controller("tableController",["$scope","$window",function($scope,$window){
 			}
 		}
    };
-
-   $scope.newGame = function(){   	
-   	$scope.initSudoku();
-   }
+  
+	   //Restart function
+	   $scope.newGame = function(){   	
+		$scope.initSudoku();
+	   }
    
-   $scope.save = function(){
-   		 for(var rowCounter=0;rowCounter<9;rowCounter++){
-            $scope.duplicateMatrix[rowCounter] = [];
-			$scope.colorMatrix[rowCounter] = [];
-            for(var colCounter=0;colCounter<9;colCounter++){
-            					//store values
-            	//if(document.getElementById(rowCounter+'_'+colCounter).style.backgroundColor != 'red'){
-                	$scope.duplicateMatrix[rowCounter][colCounter] = document.getElementById(rowCounter+'_'+colCounter).value;
-               // }/*else{	
-                	 //$scope.duplicateMatrix[rowCounter][colCounter] = $scope.matrix[rowCounter][colCounter];
-               		
-				$scope.colorMatrix[rowCounter][colCounter] = document.getElementById(rowCounter+'_'+colCounter).style;				
-            }
-        }
-        
-        //SAVE CURRENT BOARDS ACTUAL VALUES
-        
-		for(var rowCounter=0;rowCounter<9;rowCounter++){
-            $scope.savedValues[rowCounter] = [];
-			
-            for(var colCounter=0;colCounter<9;colCounter++){
-          		$scope.savedValues[rowCounter][colCounter] = $scope.matrix[rowCounter][colCounter]; 
-              }
-        }
+	   //Save function
+	   $scope.save = function(){
+			 for(var rowCounter=0;rowCounter<9;rowCounter++){
+		            $scope.duplicateMatrix[rowCounter] = [];
+			    $scope.colorMatrix[rowCounter] = [];
+		    	  for(var colCounter=0;colCounter<9;colCounter++){							
+			      $scope.duplicateMatrix[rowCounter][colCounter] = document.getElementById(rowCounter+'_'+colCounter).value;
+		      	      $scope.colorMatrix[rowCounter][colCounter] = document.getElementById(rowCounter+'_'+colCounter).style;				
+		           }
+		         }
+
+		//SAVE CURRENT BOARDS ACTUAL VALUES
+
+		 for(var rowCounter=0;rowCounter<9;rowCounter++){
+		    $scope.savedValues[rowCounter] = [];
+		    for(var colCounter=0;colCounter<9;colCounter++){
+				$scope.savedValues[rowCounter][colCounter] = $scope.matrix[rowCounter][colCounter]; 
+		      }
+		 }
       
 
 		localStorage["row0"] = JSON.stringify($scope.duplicateMatrix[0]);
@@ -223,31 +218,31 @@ app.controller("tableController",["$scope","$window",function($scope,$window){
 		localStorage["color7"] = JSON.stringify($scope.colorMatrix[7]);
 		localStorage["color8"] = JSON.stringify($scope.colorMatrix[8]);
         
-        localStorage['saved'] = 'true';
+                localStorage['saved'] = 'true';
 
    }
-
+//Resume Function
    $scope.resume = function(){
    		var parsedValues;var parsedColors;
 		for(var row=0;row<$scope.duplicateMatrix.length;row++){			
 			parsedValues = JSON.parse(localStorage["row"+row]);
-            parsedColors = JSON.parse(localStorage["color"+row]);	
-            for(var col=0;col<$scope.duplicateMatrix[row].length;col++){         
-                //get the input field id				
-                var CellID = document.getElementById(row+'_'+col);
-				CellID.value = parsedValues[col];
-				CellID.style.backgroundColor = parsedColors[col].backgroundColor;
-				
-                if(parsedValues[col] === '' || CellID.style.backgroundColor=="red"){						
-					CellID.disabled = false;					
-				}else{
-					CellID.disabled = true;	
-				}	
-			}
+           		 parsedColors = JSON.parse(localStorage["color"+row]);	
+           	 for(var col=0;col<$scope.duplicateMatrix[row].length;col++){         
+			 //get the input field id				
+			  var CellID = document.getElementById(row+'_'+col);
+			  CellID.value = parsedValues[col];
+			  CellID.style.backgroundColor = parsedColors[col].backgroundColor;
+			  if(parsedValues[col] === '' || CellID.style.backgroundColor=="red"){						
+				CellID.disabled = false;					
+			      }else{
+				     CellID.disabled = true;	
+			    }	
+	          }
 		}	
-		localStorage['saved'] = 'false';		
+	localStorage['saved'] = 'false';		
    }
 
+   //Submit function
    $scope.isGameFinished = function(){
    		var allOk = true;
 		for(var row=0;row<$scope.matrix.length;row++){
@@ -288,12 +283,10 @@ app.controller("tableController",["$scope","$window",function($scope,$window){
    $scope.saveRecentValue = function(id){ 		
    		//var id = e.currentTarget.id;
    		
-   		var cellvalue =	document.getElementById(id).value;   
-   		
+   		var cellvalue =	document.getElementById(id).value;   		
 		var cellColor = document.getElementById(id).style.backgroundColor;		
 		sessionStorage["$scope.recentValue"] = cellvalue;
-		sessionStorage["$scope.recentInputId"] = id;   
-    	
+		sessionStorage["$scope.recentInputId"] = id;     	
 		if(cellColor != 'red'){			
 			sessionStorage["cellColor"] = cellColor;
 		}
@@ -302,27 +295,22 @@ app.controller("tableController",["$scope","$window",function($scope,$window){
 
    $scope.storeValue = function(id){   	 		
    		var cellvalue =	document.getElementById(id).value;   		
-		var cellColor = document.getElementById(id).style.backgroundColor;
-        
-	    if(Number(cellvalue) < 0 || cellvalue > 9 || cellvalue == "0")	{
+		var cellColor = document.getElementById(id).style.backgroundColor;        
+	        if(Number(cellvalue) < 0 || cellvalue > 9 || cellvalue == "0")	{
 			document.getElementById(id).value = "";			
 			swal({
-			title: "Only numbers between 1-9 are allowed",
-			//text: "Oops!! Entered value is already present in Corresponding Row or Column",			
+			title: "Only numbers between 1-9 are allowed",					
 			});	
 			
 		}else
 		{
 		sessionStorage["$scope.recentValue"] = cellvalue;
-		sessionStorage["$scope.recentInputId"] = id;   
-    		
+		sessionStorage["$scope.recentInputId"] = id;      		
 		if(cellColor != 'red'){			
 			sessionStorage["cellColor"] = cellColor;
 		}
 		document.getElementById(id).style.backgroundColor = sessionStorage["cellColor"];
 	 }
-
-
    };
 
    let contains = function(value,colValues,rowValues){
@@ -338,7 +326,7 @@ app.controller("tableController",["$scope","$window",function($scope,$window){
 		return count;
    }
 
-
+//Validate function
    $scope.validate = function(){
    		var value = sessionStorage["$scope.recentValue"];		
 		if(value == "null"){
@@ -351,21 +339,15 @@ app.controller("tableController",["$scope","$window",function($scope,$window){
 		var id = sessionStorage["$scope.recentInputId"];
 		var color = sessionStorage["cellColor"];
         
-		console.log("val"+id);
-		console.log("val"+color);
 		//Get rowid and column id and store it in values
 		var values = id.split("_");	
 		var actualValue ;
-		console.log(localStorage['saved']);
-		 if(localStorage['saved'] === 'false'){
-		 	        //console.log("not saved");
+		
+		 if(localStorage['saved'] === 'false'){		 	      
                     actualValue = $scope.savedValues[values[0]][values[1]];
-                }else{
-                	//console.log("saved");
+                }else{                	
                 	actualValue = $scope.matrix[values[0]][values[1]];
-           }		
-		//var actualValue = $scope.matrix[values[0]][values[1]];
-		//console.log(values[0] + " "+ values[1]+ " " +"actualValue "+actualValue)
+                    }	
 		var colValues = [];
 		var rowValues = [];
 		
